@@ -2,6 +2,16 @@
 
 import { useState, type FormEvent } from "react";
 
+const REQUIRED_FIELDS = [
+  "nombre",
+  "email",
+  "telefono",
+  "mensaje",
+  "obra",
+  "localidad",
+  "provincia",
+] as const;
+
 const PROVINCIAS = [
   "Buenos Aires",
   "Ciudad Autónoma de Buenos Aires",
@@ -35,23 +45,43 @@ type Status = "idle" | "submitting" | "sent";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [isValid, setIsValid] = useState(false);
+
+  function checkValidity(form: HTMLFormElement) {
+    const fd = new FormData(form);
+    setIsValid(
+      REQUIRED_FIELDS.every((k) => String(fd.get(k) ?? "").trim() !== "")
+    );
+  }
+
+  function onInput(e: FormEvent<HTMLFormElement>) {
+    checkValidity(e.currentTarget);
+  }
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const allFilled = REQUIRED_FIELDS.every(
+      (k) => String(fd.get(k) ?? "").trim() !== ""
+    );
+    if (!allFilled) {
+      // surface the first invalid native control
+      if (form.reportValidity) form.reportValidity();
+      return;
+    }
     setStatus("submitting");
 
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const nombre = String(data.get("nombre") ?? "");
-    const email = String(data.get("email") ?? "");
-    const tel = String(data.get("telefono") ?? "");
-    const mensaje = String(data.get("mensaje") ?? "");
-    const obra = String(data.get("obra") ?? "");
-    const localidad = String(data.get("localidad") ?? "");
-    const provincia = String(data.get("provincia") ?? "");
+    const nombre = String(fd.get("nombre") ?? "");
+    const email = String(fd.get("email") ?? "");
+    const tel = String(fd.get("telefono") ?? "");
+    const mensaje = String(fd.get("mensaje") ?? "");
+    const obra = String(fd.get("obra") ?? "");
+    const localidad = String(fd.get("localidad") ?? "");
+    const provincia = String(fd.get("provincia") ?? "");
 
     const subject = encodeURIComponent(
-      `Consulta de presupuesto — ${nombre || "Sin nombre"}`
+      `Consulta de presupuesto — ${nombre}`
     );
     const body = encodeURIComponent(
       [
@@ -77,7 +107,8 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      noValidate
+      onInput={onInput}
+      onChange={onInput}
       className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
     >
       {/* TUS DATOS */}
@@ -191,12 +222,21 @@ export default function ContactForm() {
         <div className="pt-1">
           <button
             type="submit"
-            disabled={status === "submitting"}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 text-ink-950 px-7 py-3.5 text-base font-semibold btn-base hover:bg-white hover:text-ink-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 disabled:opacity-60 disabled:cursor-not-allowed"
+            aria-disabled={!isValid || status === "submitting"}
+            className={`w-full inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold border-2 cursor-pointer btn-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 ${
+              isValid
+                ? "bg-brand-500 border-brand-500 text-ink-950 hover:bg-transparent hover:text-white hover:border-white"
+                : "bg-brand-500/25 border-brand-500/30 text-ink-50/40"
+            }`}
           >
             {status === "submitting" ? "Enviando…" : "Enviar consulta"}
             <span aria-hidden>→</span>
           </button>
+          {!isValid && (
+            <p className="mt-3 text-xs text-ink-400 text-center">
+              Completá todos los campos para habilitar el envío.
+            </p>
+          )}
           {status === "sent" && (
             <p role="status" className="mt-3 text-sm text-brand-400">
               Abrimos tu cliente de mail con la consulta lista para enviar.
