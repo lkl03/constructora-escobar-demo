@@ -226,12 +226,12 @@ export default function Home() {
               </div>
             </Reveal>
 
-            <ul className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-px bg-ink-200 rounded-2xl overflow-hidden border border-ink-200">
+            <ul className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-800 rounded-2xl overflow-hidden border border-ink-800">
               {COMO_TRABAJAMOS.map((step, i) => (
                 <Reveal key={step.n} as="li" delay={i * 100}>
-                  <article className="h-full bg-white p-7 sm:p-8 flex flex-col justify-between min-h-[220px] group btn-base hover:bg-ink-100">
+                  <div className="h-full bg-ink-950 text-ink-50 p-6 sm:p-7 flex flex-col min-h-[220px] group btn-base hover:bg-ink-900">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-ink-400">
+                      <span className="text-xs font-mono text-ink-500">
                         {step.n}
                       </span>
                       <span
@@ -239,15 +239,15 @@ export default function Home() {
                         className="h-2 w-2 rounded-full bg-brand-500 btn-base group-hover:scale-150"
                       />
                     </div>
-                    <div className="mt-10">
-                      <h3 className="text-2xl font-semibold tracking-tight text-ink-950 btn-base group-hover:text-brand-600">
+                    <div className="mt-auto pt-8">
+                      <h3 className="text-xl font-semibold tracking-tight btn-base group-hover:text-brand-400">
                         {step.title}
                       </h3>
-                      <p className="mt-3 text-ink-700 leading-relaxed">
+                      <p className="mt-2 text-sm text-ink-400 leading-relaxed">
                         {step.body}
                       </p>
                     </div>
-                  </article>
+                  </div>
                 </Reveal>
               ))}
             </ul>
@@ -356,70 +356,70 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA / CONTACTO */}
-        <section id="contacto" className="py-24 sm:py-32 scroll-mt-24">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        {/* CTA / CONTACTO — yellow band background */}
+        <section
+          id="contacto"
+          className="relative scroll-mt-24 bg-brand-500 py-16 sm:py-20"
+        >
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal>
-              <div className="relative isolate overflow-hidden rounded-3xl bg-ink-950 px-6 sm:px-12 py-14 sm:py-20 text-ink-50">
+              <div className="relative isolate overflow-hidden rounded-3xl bg-ink-950 px-6 sm:px-12 py-12 sm:py-16 text-ink-50 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)]">
                 <div
                   aria-hidden
                   className="pointer-events-none absolute -top-32 -right-20 h-[28rem] w-[28rem] rounded-full bg-brand-500/30 blur-3xl animate-blob"
                 />
-                <div className="relative grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
-                  <div>
-                    <span className={PRETITLE}>Contacto</span>
-                    <h2 className="mt-3 text-4xl sm:text-5xl font-semibold tracking-tight">
-                      Contanos sobre tu proyecto.
-                    </h2>
-                    <p className="mt-5 text-lg text-ink-300 max-w-xl">
-                      Escuchamos cada idea con detalle. Respondemos con un
-                      diagnóstico claro, un presupuesto honesto y un cronograma
-                      realista.
-                    </p>
 
-                    <dl className="mt-10 space-y-5 text-sm">
-                      <div>
-                        <dt className="text-xs uppercase tracking-wider text-ink-500">
-                          Email
-                        </dt>
-                        <dd className="mt-1">
-                          <a
-                            href="mailto:somos@constructoraescobar.com.ar"
-                            className="text-base font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out break-all"
-                          >
-                            somos@constructoraescobar.com.ar
-                          </a>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="text-xs uppercase tracking-wider text-ink-500">
-                          WhatsApp
-                        </dt>
-                        <dd className="mt-1">
-                          <a
-                            href="https://wa.me/5493484394782"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out"
-                          >
-                            +54 9 348 439-4782
-                          </a>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="text-xs uppercase tracking-wider text-ink-500">
-                          Dónde estamos
-                        </dt>
-                        <dd className="mt-1 text-base font-medium">
-                          Escobar, Buenos Aires — Argentina
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
+                {/* TOP — info centrada */}
+                <div className="relative text-center max-w-2xl mx-auto">
+                  <span className={PRETITLE}>Contacto</span>
+                  <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
+                    Contanos sobre tu proyecto.
+                  </h2>
+                  <p className="mt-4 text-base sm:text-lg text-ink-300">
+                    Escuchamos cada idea con detalle. Respondemos con un
+                    diagnóstico claro, un presupuesto honesto y un cronograma
+                    realista.
+                  </p>
 
-                  <div>
-                    <ContactForm />
-                  </div>
+                  <ul className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-4 text-sm list-none p-0">
+                    <li className="flex items-center gap-2">
+                      <span aria-hidden className="text-brand-500">✉</span>
+                      <a
+                        href="mailto:somos@constructoraescobar.com.ar"
+                        className="font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out break-all"
+                      >
+                        somos@constructoraescobar.com.ar
+                      </a>
+                    </li>
+                    <li className="hidden sm:flex h-1 w-1 rounded-full bg-ink-700" aria-hidden />
+                    <li className="flex items-center gap-2">
+                      <span aria-hidden className="text-brand-500">✆</span>
+                      <a
+                        href="https://wa.me/5493484394782"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out"
+                      >
+                        +54 9 348 439-4782
+                      </a>
+                    </li>
+                    <li className="hidden sm:flex h-1 w-1 rounded-full bg-ink-700" aria-hidden />
+                    <li className="flex items-center gap-2 text-ink-200">
+                      <span aria-hidden className="text-brand-500">⌖</span>
+                      Escobar, Buenos Aires — Argentina
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Divider */}
+                <div
+                  aria-hidden
+                  className="relative mx-auto mt-10 mb-8 h-px w-full max-w-3xl bg-gradient-to-r from-transparent via-ink-800 to-transparent"
+                />
+
+                {/* FORM */}
+                <div className="relative max-w-3xl mx-auto">
+                  <ContactForm />
                 </div>
               </div>
             </Reveal>
@@ -439,7 +439,7 @@ export default function Home() {
                 height={105}
                 className="h-9 sm:h-10 w-auto"
               />
-              <h3 className="mt-8 text-2xl sm:text-3xl font-semibold tracking-tight">
+              <h3 className="mt-8 text-2xl sm:text-3xl font-semibold tracking-tight text-brand-500">
                 Estamos para vos.
               </h3>
               <p className="mt-4 max-w-xl text-ink-300 leading-relaxed">

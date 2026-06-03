@@ -92,33 +92,48 @@ body {
   animation: highlight-pulse 3.6s ease-in-out infinite;
 }
 
-/* Hero blob — slow drift + scale */
+/* Hero blob — vivid drift + scale */
 @keyframes blob-drift {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
-  33% {
-    transform: translate(40px, -20px) scale(1.08);
+  25% {
+    transform: translate(140px, -90px) scale(1.18) rotate(15deg);
   }
-  66% {
-    transform: translate(-30px, 30px) scale(0.95);
+  50% {
+    transform: translate(60px, 70px) scale(0.85) rotate(-10deg);
+  }
+  75% {
+    transform: translate(-120px, 20px) scale(1.12) rotate(8deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
 }
 .animate-blob {
-  animation: blob-drift 14s ease-in-out infinite;
+  animation: blob-drift 9s ease-in-out infinite;
   will-change: transform;
 }
 
 @keyframes blob-drift-alt {
-  0%, 100% {
+  0% {
     transform: translate(0, 0) scale(1);
   }
+  25% {
+    transform: translate(-120px, 60px) scale(1.15);
+  }
   50% {
-    transform: translate(-30px, 20px) scale(1.1);
+    transform: translate(80px, 120px) scale(0.9);
+  }
+  75% {
+    transform: translate(140px, -50px) scale(1.22);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
   }
 }
 .animate-blob-alt {
-  animation: blob-drift-alt 18s ease-in-out infinite;
+  animation: blob-drift-alt 11s ease-in-out infinite;
   will-change: transform;
 }
 
@@ -138,4 +153,20 @@ body {
 }
 .animate-float {
   animation: float-y 3s ease-in-out infinite;
+}
+
+/* Provincia select — black default, yellow on hover/checked */
+.provincia-select option {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 8px;
+}
+.provincia-select option:hover,
+.provincia-select option:focus,
+.provincia-select option:checked,
+.provincia-select option:active {
+  background: #fcb900 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 10px 100px #fcb900 inset;
+  -webkit-text-fill-color: #000000;
 }
