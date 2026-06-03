@@ -65,14 +65,14 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 text-sm font-medium text-ink-700 hover:text-ink-950 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-50"
+                className="px-3 py-2 text-sm font-medium text-ink-700 hover:text-brand-500 rounded-md transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-50"
               >
                 {item.label}
               </a>
             ))}
             <a
               href="#contacto"
-              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-ink-950 text-ink-50 px-4 py-2 text-sm font-medium hover:bg-ink-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-50"
+              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-ink-950 text-ink-50 px-4 py-2 text-sm font-medium btn-base hover:bg-brand-500 hover:text-ink-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-50"
             >
               Solicitar presupuesto
               <span aria-hidden>→</span>
@@ -117,7 +117,7 @@ export default function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="px-3 py-3 text-base text-ink-800 rounded-md hover:bg-ink-100"
+              className="px-3 py-3 text-base text-ink-800 rounded-md transition-colors duration-300 ease-in-out hover:bg-ink-100 hover:text-brand-500"
             >
               {item.label}
             </a>
@@ -125,7 +125,7 @@ export default function Header() {
           <a
             href="#contacto"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-ink-950 text-ink-50 px-4 py-3 text-base font-medium"
+            className="mt-2 inline-flex items-center justify-center rounded-full bg-ink-950 text-ink-50 px-4 py-3 text-base font-medium btn-base hover:bg-brand-500 hover:text-ink-950"
           >
             Solicitar presupuesto
           </a>

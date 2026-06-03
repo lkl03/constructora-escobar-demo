@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Inter_Tight } from "next/font/google";
+import { Inter_Tight, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-AR"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body
         style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
