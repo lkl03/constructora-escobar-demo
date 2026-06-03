@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import FloatingActions from "@/components/FloatingActions";
+import Gallery from "@/components/Gallery";
 
 const COMO_TRABAJAMOS = [
   {
@@ -59,29 +60,34 @@ const LO_QUE_HACEMOS = [
 
 const OBRAS = [
   {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80",
     alt: "Vivienda contemporánea con grandes ventanales",
     label: "Vivienda",
   },
   {
-    src: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1800&q=80",
     alt: "Fachada arquitectónica de hormigón",
     label: "Fachadas",
   },
   {
-    src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1800&q=80",
     alt: "Piscina exterior en jardín privado",
     label: "Piscinas",
   },
   {
-    src: "https://images.unsplash.com/photo-1503594384566-461fe158e797?auto=format&fit=crop&w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1503594384566-461fe158e797?auto=format&fit=crop&w=1800&q=80",
     alt: "Interior cálido con doble altura",
     label: "Interiores",
   },
   {
-    src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1800&q=80",
     alt: "Casa moderna con terraza y madera natural",
     label: "Espacios cubiertos",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1800&q=80",
+    alt: "Remodelación interior con detalles en madera",
+    label: "Remodelaciones",
   },
 ];
 
@@ -226,31 +232,53 @@ export default function Home() {
               </div>
             </Reveal>
 
-            <ul className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-800 rounded-2xl overflow-hidden border border-ink-800">
+            {/* Timeline horizontal en desktop, vertical en mobile */}
+            <ol
+              aria-label="Tres etapas del proceso"
+              className="mt-16 relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8"
+            >
+              {/* Connecting line (desktop) */}
+              <span
+                aria-hidden
+                className="hidden md:block absolute left-0 right-0 top-7 h-px bg-gradient-to-r from-transparent via-ink-300 to-transparent z-0"
+              />
+              {/* Connecting line (mobile) */}
+              <span
+                aria-hidden
+                className="md:hidden absolute left-7 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-ink-300 to-transparent z-0"
+              />
+
               {COMO_TRABAJAMOS.map((step, i) => (
-                <Reveal key={step.n} as="li" delay={i * 100}>
-                  <div className="h-full bg-ink-950 text-ink-50 p-6 sm:p-7 flex flex-col min-h-[220px] group btn-base hover:bg-ink-900">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-ink-500">
-                        {step.n}
-                      </span>
+                <Reveal key={step.n} as="li" delay={i * 120}>
+                  <div className="relative z-10 group flex md:flex-col items-start gap-5 md:gap-6">
+                    {/* Numbered node */}
+                    <div className="relative shrink-0">
                       <span
                         aria-hidden
-                        className="h-2 w-2 rounded-full bg-brand-500 btn-base group-hover:scale-150"
+                        className="absolute -inset-2 rounded-full bg-brand-500/0 group-hover:bg-brand-500/20 blur-md transition-all duration-500"
                       />
+                      <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-ink-950 text-brand-500 text-base font-mono font-semibold tracking-tight border-2 border-brand-500 transition-all duration-300 ease-in-out group-hover:bg-brand-500 group-hover:text-ink-950 group-hover:scale-110 group-hover:rotate-6">
+                        {step.n}
+                      </span>
                     </div>
-                    <div className="mt-auto pt-8">
-                      <h3 className="text-xl font-semibold tracking-tight btn-base group-hover:text-brand-400">
+
+                    {/* Content */}
+                    <div className="flex-1 pt-2 md:pt-0">
+                      <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink-950 transition-colors duration-300 ease-in-out group-hover:text-brand-600">
                         {step.title}
                       </h3>
-                      <p className="mt-2 text-sm text-ink-400 leading-relaxed">
+                      <p className="mt-3 text-ink-700 leading-relaxed max-w-sm">
                         {step.body}
                       </p>
+                      <span
+                        aria-hidden
+                        className="mt-5 inline-block h-px w-10 bg-brand-500 transition-all duration-500 ease-out group-hover:w-24"
+                      />
                     </div>
                   </div>
                 </Reveal>
               ))}
-            </ul>
+            </ol>
           </div>
         </section>
 
@@ -302,9 +330,21 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OBRAS / BENTO */}
-        <section id="obras" className="py-24 sm:py-32 scroll-mt-24">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        {/* OBRAS / BENTO con lightbox */}
+        <section
+          id="obras"
+          className="relative isolate overflow-hidden py-24 sm:py-32 scroll-mt-24"
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-32 -right-32 -z-10 h-[34rem] w-[34rem] rounded-full bg-brand-500/25 blur-3xl animate-blob"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute bottom-0 -left-40 -z-10 h-[28rem] w-[28rem] rounded-full bg-brand-500/15 blur-3xl animate-blob-alt"
+          />
+
+          <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 max-w-5xl">
                 <div>
@@ -315,44 +355,13 @@ export default function Home() {
                 </div>
                 <p className="text-ink-700 max-w-md">
                   Interiores, fachadas, piscinas, superficies, espacios
-                  cubiertos y remodelaciones. Cada proyecto es único.
+                  cubiertos y remodelaciones. Cada proyecto es único.{" "}
+                  <span className="text-ink-500">Tocá una imagen para ampliarla.</span>
                 </p>
               </div>
             </Reveal>
 
-            {/* Bento grid: 6 columnas, 4 filas en desktop */}
-            <div className="mt-14 grid grid-cols-2 md:grid-cols-6 auto-rows-[120px] sm:auto-rows-[140px] gap-3 sm:gap-4">
-              {/* Large feature — top left */}
-              <BentoTile
-                obra={OBRAS[0]}
-                className="col-span-2 md:col-span-4 row-span-3"
-                delay={0}
-              />
-              {/* Top right tall */}
-              <BentoTile
-                obra={OBRAS[1]}
-                className="col-span-2 md:col-span-2 row-span-2"
-                delay={80}
-              />
-              {/* Middle right */}
-              <BentoTile
-                obra={OBRAS[2]}
-                className="col-span-1 md:col-span-2 row-span-2"
-                delay={160}
-              />
-              {/* Bottom left */}
-              <BentoTile
-                obra={OBRAS[3]}
-                className="col-span-1 md:col-span-2 row-span-2"
-                delay={240}
-              />
-              {/* Bottom middle */}
-              <BentoTile
-                obra={OBRAS[4]}
-                className="col-span-2 md:col-span-2 row-span-2"
-                delay={320}
-              />
-            </div>
+            <Gallery images={OBRAS} />
           </div>
         </section>
 
@@ -363,14 +372,9 @@ export default function Home() {
         >
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal>
-              <div className="relative isolate overflow-hidden rounded-3xl bg-ink-950 px-6 sm:px-12 py-12 sm:py-16 text-ink-50 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)]">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -top-32 -right-20 h-[28rem] w-[28rem] rounded-full bg-brand-500/30 blur-3xl animate-blob"
-                />
-
+              <div className="relative overflow-hidden rounded-3xl bg-ink-950 px-6 sm:px-12 py-12 sm:py-16 text-ink-50 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)]">
                 {/* TOP — info centrada */}
-                <div className="relative text-center max-w-2xl mx-auto">
+                <div className="relative text-center mx-auto max-w-3xl">
                   <span className={PRETITLE}>Contacto</span>
                   <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
                     Contanos sobre tu proyecto.
@@ -380,35 +384,32 @@ export default function Home() {
                     diagnóstico claro, un presupuesto honesto y un cronograma
                     realista.
                   </p>
+                </div>
 
-                  <ul className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-4 text-sm list-none p-0">
-                    <li className="flex items-center gap-2">
-                      <span aria-hidden className="text-brand-500">✉</span>
-                      <a
-                        href="mailto:somos@constructoraescobar.com.ar"
-                        className="font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out break-all"
-                      >
-                        somos@constructoraescobar.com.ar
-                      </a>
-                    </li>
-                    <li className="hidden sm:flex h-1 w-1 rounded-full bg-ink-700" aria-hidden />
-                    <li className="flex items-center gap-2">
-                      <span aria-hidden className="text-brand-500">✆</span>
-                      <a
-                        href="https://wa.me/5493484394782"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out"
-                      >
-                        +54 9 348 439-4782
-                      </a>
-                    </li>
-                    <li className="hidden sm:flex h-1 w-1 rounded-full bg-ink-700" aria-hidden />
-                    <li className="flex items-center gap-2 text-ink-200">
-                      <span aria-hidden className="text-brand-500">⌖</span>
-                      Escobar, Buenos Aires — Argentina
-                    </li>
-                  </ul>
+                {/* Contact info — single line on desktop */}
+                <div className="relative mt-8 flex flex-col md:flex-row items-center justify-center md:flex-wrap gap-x-6 lg:gap-x-10 gap-y-3 text-sm">
+                  <a
+                    href="mailto:somos@constructoraescobar.com.ar"
+                    className="inline-flex items-center gap-2 whitespace-nowrap font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out"
+                  >
+                    <span aria-hidden className="text-brand-500">✉</span>
+                    somos@constructoraescobar.com.ar
+                  </a>
+                  <span className="hidden md:inline h-1 w-1 rounded-full bg-ink-700" aria-hidden />
+                  <a
+                    href="https://wa.me/5493484394782"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 whitespace-nowrap font-medium text-ink-50 hover:text-brand-500 transition-colors duration-300 ease-in-out"
+                  >
+                    <span aria-hidden className="text-brand-500">✆</span>
+                    +54 9 348 439-4782
+                  </a>
+                  <span className="hidden md:inline h-1 w-1 rounded-full bg-ink-700" aria-hidden />
+                  <span className="inline-flex items-center gap-2 whitespace-nowrap text-ink-200">
+                    <span aria-hidden className="text-brand-500">⌖</span>
+                    Escobar, Buenos Aires — Argentina
+                  </span>
                 </div>
 
                 {/* Divider */}
@@ -559,34 +560,3 @@ export default function Home() {
   );
 }
 
-type BentoTileProps = {
-  obra: { src: string; alt: string; label: string };
-  className?: string;
-  delay?: number;
-};
-
-function BentoTile({ obra, className = "", delay = 0 }: BentoTileProps) {
-  return (
-    <Reveal delay={delay} className={className}>
-      <figure className="group relative h-full w-full overflow-hidden rounded-2xl bg-ink-200">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={obra.src}
-          alt={obra.alt}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        />
-        <figcaption className="absolute left-4 bottom-4 right-4 flex items-center justify-between text-ink-50 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-          <span className="text-sm font-semibold tracking-wide bg-brand-500 text-ink-950 px-3 py-1.5 rounded-full">
-            {obra.label}
-          </span>
-        </figcaption>
-      </figure>
-    </Reveal>
-  );
-}

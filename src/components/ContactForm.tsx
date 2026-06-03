@@ -192,7 +192,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 text-ink-950 px-7 py-3.5 text-base font-semibold btn-base hover:bg-ink-950 hover:text-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 text-ink-950 px-7 py-3.5 text-base font-semibold btn-base hover:bg-white hover:text-ink-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {status === "submitting" ? "Enviando…" : "Enviar consulta"}
             <span aria-hidden>→</span>
