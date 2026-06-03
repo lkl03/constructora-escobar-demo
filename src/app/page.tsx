@@ -377,7 +377,7 @@ export default function Home() {
         >
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal>
-              <div className="relative overflow-hidden rounded-3xl bg-ink-950/80 backdrop-blur-xl px-6 sm:px-12 py-12 sm:py-16 text-ink-50 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)] ring-1 ring-ink-50/5">
+              <div className="relative overflow-hidden rounded-3xl bg-ink-950 px-6 sm:px-12 py-12 sm:py-16 text-ink-50 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.35)]">
                 {/* TOP — info centrada */}
                 <div className="relative text-center mx-auto max-w-3xl">
                   <span className={PRETITLE}>Contacto</span>

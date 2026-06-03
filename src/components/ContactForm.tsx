@@ -220,23 +220,35 @@ export default function ContactForm() {
         </div>
 
         <div className="pt-1">
-          <button
-            type="submit"
-            aria-disabled={!isValid || status === "submitting"}
-            className={`w-full inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold border-2 cursor-pointer btn-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 ${
-              isValid
-                ? "bg-brand-500 border-brand-500 text-ink-950 hover:bg-transparent hover:text-white hover:border-white"
-                : "bg-brand-500/25 border-brand-500/30 text-ink-50/40"
-            }`}
-          >
-            {status === "submitting" ? "Enviando…" : "Enviar consulta"}
-            <span aria-hidden>→</span>
-          </button>
-          {!isValid && (
-            <p className="mt-3 text-xs text-ink-400 text-center">
-              Completá todos los campos para habilitar el envío.
-            </p>
-          )}
+          <div className="group relative">
+            <button
+              type="submit"
+              aria-disabled={!isValid || status === "submitting"}
+              className={`w-full inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold border-2 cursor-pointer btn-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 ${
+                isValid
+                  ? "bg-brand-500 border-brand-500 text-ink-950 hover:bg-transparent hover:text-white hover:border-white"
+                  : "bg-ink-800 border-ink-700 text-ink-500"
+              }`}
+            >
+              {status === "submitting" ? "Enviando…" : "Enviar consulta"}
+              <span aria-hidden>→</span>
+            </button>
+
+            {/* Tooltip — visible solo en hover cuando está disabled */}
+            {!isValid && status !== "submitting" && (
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+10px)] whitespace-nowrap rounded-md bg-ink-50 px-3 py-1.5 text-xs font-medium text-ink-950 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out shadow-lg"
+              >
+                Completá todos los campos para habilitar el envío
+                <span
+                  aria-hidden
+                  className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-x-4 border-x-transparent border-t-4 border-t-ink-50"
+                />
+              </span>
+            )}
+          </div>
+
           {status === "sent" && (
             <p role="status" className="mt-3 text-sm text-brand-400">
               Abrimos tu cliente de mail con la consulta lista para enviar.
