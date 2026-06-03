@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 export type LightboxImage = {
   src: string;
@@ -22,6 +23,11 @@ export default function Lightbox({
   onIndexChange,
 }: LightboxProps) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const next = useCallback(() => {
     if (index === null) return;
@@ -53,16 +59,16 @@ export default function Lightbox({
     };
   }, [index, onClose, next, prev]);
 
-  if (index === null) return null;
+  if (index === null || !mounted) return null;
   const img = images[index];
 
-  return (
+  const overlay = (
     <div
       role="dialog"
       aria-modal="true"
       aria-label={`Obra ${index + 1} de ${images.length}: ${img.label}`}
       onClick={onClose}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink-950/90 backdrop-blur-sm p-4 sm:p-8 animate-[fadeIn_200ms_ease-out]"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink-950/95 backdrop-blur-sm p-4 sm:p-8"
       style={{ animation: "fadeIn 200ms ease-out" }}
     >
       {/* Top bar */}
@@ -180,4 +186,6 @@ export default function Lightbox({
       `}</style>
     </div>
   );
+
+  return createPortal(overlay, document.body);
 }
