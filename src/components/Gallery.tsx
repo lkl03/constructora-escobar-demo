@@ -9,10 +9,14 @@ type GalleryProps = {
 };
 
 const BENTO_SPAN = [
-  "col-span-2 md:col-span-4 row-span-3",
+  // Row 1-3
+  "col-span-2 md:col-span-4 row-span-3", // big feature
+  "col-span-2 md:col-span-2 row-span-3", // tall on the right
+  // Row 4-5
+  "col-span-1 md:col-span-2 row-span-2",
+  "col-span-1 md:col-span-2 row-span-2",
   "col-span-2 md:col-span-2 row-span-2",
-  "col-span-1 md:col-span-2 row-span-2",
-  "col-span-1 md:col-span-2 row-span-2",
+  // Row 6-7
   "col-span-1 md:col-span-3 row-span-2",
   "col-span-1 md:col-span-3 row-span-2",
 ];

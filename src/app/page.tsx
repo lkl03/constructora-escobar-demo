@@ -89,6 +89,11 @@ const OBRAS = [
     alt: "Remodelación interior con detalles en madera",
     label: "Remodelaciones",
   },
+  {
+    src: "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?auto=format&fit=crop&w=1800&q=80",
+    alt: "Arquitectura contemporánea de varios pisos",
+    label: "Superficies",
+  },
 ];
 
 const MARQUEE = [
