@@ -78,11 +78,11 @@ export default function ContactForm() {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-8"
+      className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
     >
       {/* TUS DATOS */}
-      <fieldset className="space-y-5">
-        <legend className="text-xs uppercase tracking-[0.18em] text-brand-500 font-semibold mb-4 block">
+      <fieldset className="space-y-4">
+        <legend className="text-xs uppercase tracking-[0.18em] text-brand-500 font-semibold mb-3 block">
           Tus datos
         </legend>
 
@@ -116,16 +116,16 @@ export default function ContactForm() {
             id="mensaje"
             name="mensaje"
             required
-            rows={5}
+            rows={4}
             placeholder="Tu mensaje *"
-            className="w-full rounded-xl bg-ink-900/60 border border-ink-800 px-4 py-3 text-ink-50 placeholder:text-ink-500 outline-none transition-colors duration-300 ease-in-out focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40 resize-y min-h-[120px]"
+            className="w-full rounded-xl bg-ink-900/60 border border-ink-800 px-4 py-3 text-ink-50 placeholder:text-ink-500 outline-none transition-colors duration-300 ease-in-out focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40 resize-y min-h-[110px]"
           />
         </div>
       </fieldset>
 
       {/* DATOS DEL PROYECTO */}
-      <fieldset className="space-y-5">
-        <legend className="text-xs uppercase tracking-[0.18em] text-brand-500 font-semibold mb-4 block">
+      <fieldset className="space-y-4">
+        <legend className="text-xs uppercase tracking-[0.18em] text-brand-500 font-semibold mb-3 block">
           Datos del proyecto
         </legend>
 
@@ -148,7 +148,7 @@ export default function ContactForm() {
             autoComplete="address-level2"
           />
 
-          <div>
+          <div className="provincia-wrapper relative">
             <label htmlFor="provincia" className="sr-only">
               Provincia
             </label>
@@ -157,34 +157,48 @@ export default function ContactForm() {
               name="provincia"
               required
               defaultValue=""
-              className="w-full rounded-xl bg-ink-900/60 border border-ink-800 px-4 py-3 text-ink-50 outline-none transition-colors duration-300 ease-in-out focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40 appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23a8a29e%22 stroke-width=%222%22><polyline points=%226 9 12 15 18 9%22/></svg>')] bg-no-repeat bg-[right_1rem_center]"
+              className="provincia-select w-full rounded-xl bg-ink-950 border border-ink-800 px-4 py-3 pr-10 text-ink-50 outline-none transition-colors duration-300 ease-in-out focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40 appearance-none cursor-pointer"
             >
               <option value="" disabled>
                 Provincia *
               </option>
               {PROVINCIAS.map((p) => (
-                <option key={p} value={p} className="bg-ink-950 text-ink-50">
+                <option key={p} value={p}>
                   {p}
                 </option>
               ))}
             </select>
+            <span
+              aria-hidden
+              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-400"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
           </div>
         </div>
 
-        <div className="pt-2">
+        <div className="pt-1">
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 text-ink-950 px-7 py-3.5 text-base font-semibold btn-base hover:bg-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 text-ink-950 px-7 py-3.5 text-base font-semibold btn-base hover:bg-ink-950 hover:text-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {status === "submitting" ? "Enviando…" : "Enviar consulta"}
             <span aria-hidden>→</span>
           </button>
           {status === "sent" && (
-            <p
-              role="status"
-              className="mt-3 text-sm text-brand-400"
-            >
+            <p role="status" className="mt-3 text-sm text-brand-400">
               Abrimos tu cliente de mail con la consulta lista para enviar.
             </p>
           )}
